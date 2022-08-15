@@ -22,3 +22,13 @@ MVP
   - Render chessboard representation in CLI
   - User commands pieces with keyboard command Ex: E4 to E6
   - Make tests pass
+
+## Domain Model
+
+![Project Domain Model](img/Domain%20Model.png)
+
+## Chess Board Model
+
+### CLI Chess Board
+
+![Chess Board Model: CLI](img/Chess%20Board%20Model.png)

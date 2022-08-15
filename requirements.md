@@ -29,8 +29,8 @@ A free and accessible way to play chess on your computer, and it's fun. Plus you
 
 - CLI interface
   - Letters represent different pieces
-  - [] is white, () is black, eg;[K]=a white king
-  - "X" represents an empty space
+  - [] is white, {} is black, eg: [K] is a white king
+  - "x" represents an empty space
 
 - Ask if user wants to play against computer or AI
 
