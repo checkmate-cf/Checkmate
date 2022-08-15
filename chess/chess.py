@@ -1,4 +1,5 @@
 import board
+import re
 
 
 def welcome_user():
@@ -10,7 +11,21 @@ def move_piece(current_color, start_pos, end_pos):
 
 
 def parse_input(user_input):
-    pass
+    """
+    Checks to see if user_input valid within confines of chess space and desired format, then return tuple with start_pos
+    and end_pos. Returns False if invalid user_input.
+
+    :param user_input: format "D2 D3"
+    :return: tuple(D2, D3)
+    """
+    split_input = user_input.split()
+    if len(split_input) != 2:
+        return False
+    for pos in split_input:
+        pattern = r"^[A-H][1-8]$"
+        if not re.match(pattern, pos):
+            return False
+    return tuple(split_input)
 
 
 def validate_move(piece, start_pos, end_pos, board):
