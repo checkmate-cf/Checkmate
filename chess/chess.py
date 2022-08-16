@@ -59,30 +59,85 @@ def validate_move(start_pos, end_pos, board, player_color):
     start_coord = [ord(start_list[0] - 65), 7 - (int(start_list[1])-1)]
     end_coord = [ord(end_list[0] - 65), 7 - (int(end_list[1])-1)]
 
+    def get_piece():
+        return board[start_coord[1]][start_coord[0]]
 
     # validate piece color is same as player color
-    def check_color(color):
+    def get_color():
         # get color of piece at start_pos
-        piece_color = "white"
         if board[start_coord[1]][start_coord[0]][0] == "{":
-            piece_color = "black"
-        if color == piece_color:
+            return "black"
+        return "white"
+
+    def check_color_match(player, piece):
+        if player == piece:
             return True
         else:
             return False
 
+    # Get the piece being moved
+    piece = get_piece()
 
-    def validate_pawn(color, start_pos, end_pos, board):
-        pass
+    # Check if selected space actually has a piece
+    if piece == "x":
+        return False
 
-    def validate_rook(start_pos, end_pos, board):
+    # Get color of piece being moved
+    piece_color = get_color()
+
+    # Check if player is moving their own piece
+    if not check_color_match(player_color, piece_color):
+        return False
+
+
+    def validate_pawn(color, start, end, board):
+        # Different direction allowed for different color
+        if color == "black":
+            # check if moving 2 spaces from home row
+            if start[1] - end[1] == -2:
+                return start[1] == 1
+
+            # piece moves one space down
+            if start[1] - end[1] == -1:
+                # check diagonal attack
+                if abs(start[0] - end[0]) == 1:
+                    # check for enemy at end point
+                    if board[end[1]][end[0]] == "x":
+                        return False
+                    return True
+
+                # moves straight down
+                # check if end point is empty
+                if board[end[1]][end[0]] != "x":
+                    return False
+
+        if color == "white":
+            # check if moving 2 spaces from home row
+            if start[1] - end[1] == 2:
+                return start[1] == 6
+
+            # piece moves one space down
+            if start[1] - end[1] == 1:
+                # check diagonal attack
+                if abs(start[0] - end[0]) == 1:
+                    # check for enemy at end point
+                    if board[end[1]][end[0]] == "x":
+                        return False
+                    return True
+
+                # moves straight down
+                # check if end point is empty
+                if board[end[1]][end[0]] != "x":
+                    return False
+
+    def validate_rook(start, end, board):
         # same column
-        if start_pos[0] == end_pos[0]:
-            spaces = abs(start_pos[1] - end_pos[1])
+        if start[0] == end[0]:
+            spaces = abs(start[1] - end[1])
             # check if moving down
-            if start_pos[1] - end_pos[1] < 0:
-                row = start_pos[1] + 1
-                col = start_pos[0]
+            if start[1] - end[1] < 0:
+                row = start[1] + 1
+                col = start[0]
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -90,8 +145,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                     spaces -= 1
                 return True
             # moving up
-            row = start_pos[1] - 1
-            col = start_pos[0]
+            row = start[1] - 1
+            col = start[0]
             while spaces > 0:
                 if board[row][col] != "x":
                     return False
@@ -100,12 +155,12 @@ def validate_move(start_pos, end_pos, board, player_color):
             return True
 
         # same row
-        if start_pos[1] == end_pos[1]:
-            spaces = abs(start_pos[0] - end_pos[0])
+        if start[1] == end[1]:
+            spaces = abs(start[0] - end[0])
             # check if moving right
-            if start_pos[0] - end_pos[0] < 0:
-                row = start_pos[1]
-                col = start_pos[0] + 1
+            if start[0] - end[0] < 0:
+                row = start[1]
+                col = start[0] + 1
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -113,8 +168,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                     spaces -= 1
                 return True
             # moving left
-            row = start_pos[1]
-            col = start_pos[0] - 1
+            row = start[1]
+            col = start[0] - 1
             while spaces > 0:
                 if board[row][col] != "x":
                     return False
@@ -124,26 +179,38 @@ def validate_move(start_pos, end_pos, board, player_color):
 
         return False
 
-    def validate_king(start_pos, end_pos, board):
-        pass
+    def validate_king(start, end):
+        # check vertical first
+        if abs(start[1] - end[1]) == 1:
+            # check horizontal
+            if abs(start[0] - end[0]) <= 1:
+                return True
 
-    def validate_queen(start_pos, end_pos, board):
-        if validate_rook(start_pos, end_pos, board) or validate_bishop(start_pos, end_pos, board):
+        # check horizontal first
+        if abs(start[0] - end[0]) == 1:
+            # check vertical
+            if abs(start[1] - end[1]) <= 1:
+                return True
+
+        return False
+
+    def validate_queen(start, end, board):
+        if validate_rook(start, end, board) or validate_bishop(start, end, board):
             return True
 
         return False
 
-    def validate_bishop(start_pos, end_pos, board):
+    def validate_bishop(start, end, board):
         # check if diagonal
-        if abs(start_pos[0] - end_pos[0]) != abs(start_pos[1] - end_pos[1]):
+        if abs(start[0] - end[0]) != abs(start[1] - end[1]):
             return False
-        spaces = abs(start_pos[0] - end_pos[0])
+        spaces = abs(start[0] - end[0])
         # check if moving right
-        if start_pos[1] - end_pos[1] < 0:
+        if start[1] - end[1] < 0:
             # check if moving down
-            if start_pos[0] - end_pos[0] < 0:
-                row = start_pos[1] + 1
-                col = start_pos[0] + 1
+            if start[0] - end[0] < 0:
+                row = start[1] + 1
+                col = start[0] + 1
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -153,8 +220,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                 return True
             # moving up
             else:
-                row = start_pos[1] - 1
-                col = start_pos[0] + 1
+                row = start[1] - 1
+                col = start[0] + 1
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -166,9 +233,9 @@ def validate_move(start_pos, end_pos, board, player_color):
         # moving left
         else:
             # check if moving down
-            if start_pos[0] - end_pos[0] < 0:
-                row = start_pos[1] + 1
-                col = start_pos[0] - 1
+            if start[0] - end[0] < 0:
+                row = start[1] + 1
+                col = start[0] - 1
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -178,8 +245,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                 return True
             # moving up
             else:
-                row = start_pos[1] - 1
-                col = start_pos[0] - 1
+                row = start[1] - 1
+                col = start[0] - 1
                 while spaces > 0:
                     if board[row][col] != "x":
                         return False
@@ -188,24 +255,33 @@ def validate_move(start_pos, end_pos, board, player_color):
                     spaces -= 1
                 return True
 
+    def validate_knight(start, end):
+        # check horizontal change
+        if abs(start[0] - end[0]) == 2:
+            # check vertical change
+            if abs(start[1] - end[1]) == 1:
+                return True
 
-    def validate_knight(start_pos, end_pos, board):
-        pass
+        # check vertical change
+        if abs(start[1] - end[1]) == 2:
+            # check horizontal change
+            if abs(start[0] - end[0]) == 1:
+                return True
+
+        return False
 
     if piece[1] == "Q":
         return validate_queen(start_coord, end_coord, board)
     elif piece[1] == "r":
         return validate_rook(start_coord, end_coord, board)
     elif piece[1] == "K":
-        return validate_king(start_coord, end_coord, board)
+        return validate_king(start_coord, end_coord)
     elif piece[1] == "b":
         return validate_bishop(start_coord, end_coord, board)
     elif piece[1] == "k":
-        return validate_knight(start_coord, end_coord, board)
-    elif piece == "{p}":
-        return validate_pawn("black", start_coord, end_coord, board)
-    elif piece == "[p]":
-        return validate_pawn("white", start_coord, end_coord, board)
+        return validate_knight(start_coord, end_coord)
+    elif piece[1] == "p":
+        return validate_pawn(piece_color, start_coord, end_coord, board)
 
 
 def check_check(color, board):
