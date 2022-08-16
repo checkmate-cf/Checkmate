@@ -72,11 +72,11 @@ def check_check(color, board, move=None):
             if color and col_val[0] == "{":
                 start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
                 end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board)
+                validate_move(start_pos_text, end_pos_text, copied_board, "white")
             elif not color and col_val[0] == "[":
                 start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
                 end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board)
+                validate_move(start_pos_text, end_pos_text, copied_board, "black")
 
 
 def check_checkmate(color, board):
@@ -98,16 +98,16 @@ def validate_move(start_pos, end_pos, board, player_color):
     # turn string input into array coordinates
     start_list = list(start_pos)
     end_list = list(end_pos)
-    start_coord = [ord(start_list[0] - 65), 7 - (int(start_list[1])-1)]
-    end_coord = [ord(end_list[0] - 65), 7 - (int(end_list[1])-1)]
+    start_coord = [ord(start_list[0]) - 65, 7 - (int(start_list[1])-1)]
+    end_coord = [ord(end_list[0]) - 65, 7 - (int(end_list[1])-1)]
 
     def get_piece():
-        return board[start_coord[1]][start_coord[0]]
+        return board.board[start_coord[1]][start_coord[0]]
 
     # validate piece color is same as player color
     def get_color():
         # get color of piece at start_pos
-        if board[start_coord[1]][start_coord[0]][0] == "{":
+        if board.board[start_coord[1]][start_coord[0]][0] == "{":
             return "black"
         return "white"
 
@@ -119,16 +119,21 @@ def validate_move(start_pos, end_pos, board, player_color):
 
     # Get the piece being moved
     piece = get_piece()
+    print(f"piece: {piece}")
 
     # Check if selected space actually has a piece
     if piece == "x":
+        print("piece can't be empty")
         return False
 
     # Get color of piece being moved
     piece_color = get_color()
+    print(f"piece color: {piece_color}")
 
     # Check if player is moving their own piece
     if not check_color_match(player_color, piece_color):
+        print(f"player_color: {player_color}, piece_color:{piece_color}")
+        print("color doesn't match")
         return False
 
 
@@ -137,6 +142,7 @@ def validate_move(start_pos, end_pos, board, player_color):
         if color == "black":
             # check if moving 2 spaces from home row
             if start[1] - end[1] == -2:
+                print("pawn moves 2")
                 return start[1] == 1
 
             # piece moves one space down
@@ -144,18 +150,23 @@ def validate_move(start_pos, end_pos, board, player_color):
                 # check diagonal attack
                 if abs(start[0] - end[0]) == 1:
                     # check for enemy at end point
-                    if board[end[1]][end[0]] == "x":
+                    if board.board[end[1]][end[0]] == "x":
+                        print("pawn can only move diagonal if attacking")
                         return False
                     return True
 
                 # moves straight down
                 # check if end point is empty
-                if board[end[1]][end[0]] != "x":
+                if board.board[end[1]][end[0]] != "x":
+                    print("pawn can only move forward if empty")
                     return False
+                return True
+            print("end of black")
 
         if color == "white":
             # check if moving 2 spaces from home row
             if start[1] - end[1] == 2:
+                print("pawn moves 2")
                 return start[1] == 6
 
             # piece moves one space down
@@ -163,14 +174,18 @@ def validate_move(start_pos, end_pos, board, player_color):
                 # check diagonal attack
                 if abs(start[0] - end[0]) == 1:
                     # check for enemy at end point
-                    if board[end[1]][end[0]] == "x":
+                    if board.board[end[1]][end[0]] == "x":
+                        print("pawn can only move diagonal if attacking")
                         return False
                     return True
 
                 # moves straight down
                 # check if end point is empty
-                if board[end[1]][end[0]] != "x":
+                if board.board[end[1]][end[0]] != "x":
+                    print("pawn can only move forward if empty")
                     return False
+                return True
+            print("end of white")
 
     def validate_rook(start, end, board):
         # same column
@@ -181,7 +196,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1] + 1
                 col = start[0]
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     row += 1
                     spaces -= 1
@@ -190,7 +205,7 @@ def validate_move(start_pos, end_pos, board, player_color):
             row = start[1] - 1
             col = start[0]
             while spaces > 0:
-                if board[row][col] != "x":
+                if board.board[row][col] != "x":
                     return False
                 row -= 1
                 spaces -= 1
@@ -204,7 +219,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1]
                 col = start[0] + 1
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     col += 1
                     spaces -= 1
@@ -213,7 +228,7 @@ def validate_move(start_pos, end_pos, board, player_color):
             row = start[1]
             col = start[0] - 1
             while spaces > 0:
-                if board[row][col] != "x":
+                if board.board[row][col] != "x":
                     return False
                 col -= 1
                 spaces -= 1
@@ -254,7 +269,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1] + 1
                 col = start[0] + 1
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     col += 1
                     row += 1
@@ -265,7 +280,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1] - 1
                 col = start[0] + 1
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     col += 1
                     row -= 1
@@ -279,7 +294,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1] + 1
                 col = start[0] - 1
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     col -= 1
                     row += 1
@@ -290,7 +305,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                 row = start[1] - 1
                 col = start[0] - 1
                 while spaces > 0:
-                    if board[row][col] != "x":
+                    if board.board[row][col] != "x":
                         return False
                     col -= 1
                     row -= 1
@@ -323,6 +338,7 @@ def validate_move(start_pos, end_pos, board, player_color):
     elif piece[1] == "k":
         return validate_knight(start_coord, end_coord)
     elif piece[1] == "p":
+        print("checking pawn")
         return validate_pawn(piece_color, start_coord, end_coord, board)
 
 
@@ -344,8 +360,8 @@ def play_game():
                 parsed_input = parse_input(user_input)
                 if not parsed_input:
                     print('Please answer in the format "B2 B3". Must be in range A-H and 1-8')
-                # elif not validate_move(valid_parsed_input[0], valid_parsed_input[1], game_board, curr_player.lower):
-                #     print('Move not possible')
+                elif not validate_move(parsed_input[0], parsed_input[1], game_board, curr_player.lower()):
+                    print('Move not possible')
                 elif check_check(curr_player, game_board, parsed_input):
                     print("You may not cause your own king to be put in check")
                 else:
