@@ -27,8 +27,3 @@ class Chessboard:
         for i in range(8):
             print(f"   {chr(65 + i)}", end="")
         print()
-
-
-if __name__ == "__main__":
-    my_board = Chessboard()
-    my_board.render()
