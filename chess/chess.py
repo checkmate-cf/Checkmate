@@ -3,13 +3,14 @@ import re
 import copy
 
 
-def welcome_user():
-    print("Welcome to Checkmate, the ultimate destination for playing chess!")
+def welcome_user(first_game):
+    if first_game:
+        print("Welcome to Checkmate, the ultimate destination for playing chess!!\n")
     print("Would you like to play chess? y/n ")
     user_input = input("> ").lower()
     while user_input != "y" and user_input != "n":
         print('Must enter valid response: "y" or "n", try again')
-        input("> ")
+        user_input = input("> ").lower()
     return user_input == "y"
 
 
@@ -56,31 +57,35 @@ def check_check(color, board, move=None):
     def find_king(color, copied_board):
         for row_idx, row in enumerate(copied_board.board):
             for col_idx, col_val in enumerate(row):
-                if color:
+                if color == "white":
                     if col_val == "[K]":
                         return row_idx, col_idx
                 else:
                     if col_val == "{K}":
                         return row_idx, col_idx
 
-    copied_board = copy.deepcopy(board)
+    search_board = board
     if move:
-        move_piece(move[0], move[1], copied_board.board, False)
-    king_loc = find_king(color, copied_board)
-    for row_idx, row in enumerate(copied_board.board):
+        search_board = copy.deepcopy(board)
+        move_piece(move[0], move[1], search_board.board, False)
+    king_loc = find_king(color, search_board)
+    for row_idx, row in enumerate(search_board.board):
         for col_idx, col_val in enumerate(row):
-            if color and col_val[0] == "{":
-                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
-                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board, "white")
-            elif not color and col_val[0] == "[":
-                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
-                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board, "black")
+            if color == "white" and col_val[0] == "{":
+                start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
+                end_pos_text = f"{chr(king_loc[1] + 65)}{8 - king_loc[0]}"
+                if validate_move(start_pos_text, end_pos_text, search_board, "black"):
+                    return True
+            elif color == "black" and col_val[0] == "[":
+                start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
+                end_pos_text = f"{chr(king_loc[1] + 65)}{8 - king_loc[0]}"
+                if validate_move(start_pos_text, end_pos_text, search_board, "white"):
+                    return True
+    return False
 
 
 def check_checkmate(color, board):
-    pass
+    return False
 
 
 def pawn_promotion(end_col, board, curr_color):
@@ -338,7 +343,7 @@ def validate_move(start_pos, end_pos, board, player_color):
     elif piece[1] == "k":
         return validate_knight(start_coord, end_coord)
     elif piece[1] == "p":
-        print("checking pawn")
+        # print("checking pawn")
         return validate_pawn(piece_color, start_coord, end_coord, board)
 
 
@@ -347,7 +352,10 @@ def reset(board):
 
 
 def play_game():
-    if welcome_user():
+    first_game = True
+    while welcome_user(first_game):
+        first_game = False
+        print('Let the games begin, if at any point you want to quit, type "Forfeit"')
         game_board = Chessboard()
         game_not_over = True
         curr_player = "White"
@@ -357,19 +365,36 @@ def play_game():
             valid_move = False
             while not valid_move:
                 user_input = input("Where would you like to move: ")
+                if user_input.lower() == "forfeit":
+                    if curr_player == "White":
+                        print("Black Wins!!\n")
+                    else:
+                        print("White Wins!!\n")
+                    game_not_over = False
+                    break
                 parsed_input = parse_input(user_input)
                 if not parsed_input:
                     print('Please answer in the format "B2 B3". Must be in range A-H and 1-8')
                 elif not validate_move(parsed_input[0], parsed_input[1], game_board, curr_player.lower()):
                     print('Move not possible')
-                elif check_check(curr_player, game_board, parsed_input):
+                elif check_check(curr_player.lower(), game_board, parsed_input):
                     print("You may not cause your own king to be put in check")
                 else:
                     valid_move = True
                     move_piece(parsed_input[0], parsed_input[1], game_board.board)
             if curr_player == "White":
+                if check_check("black", game_board):
+                    if check_checkmate("black", game_board):
+                        print(f"CHECKMATE! {curr_player} wins!!")
+                    else:
+                        print("Check!")
                 curr_player = "Black"
             elif curr_player == "Black":
+                if check_check("white", game_board):
+                    if check_checkmate("white", game_board):
+                        print(f"CHECKMATE! {curr_player} wins!!")
+                    else:
+                        print("Check!")
                 curr_player = "White"
 
 
