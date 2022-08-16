@@ -149,14 +149,6 @@ def validate_move(start_pos, end_pos, board, player_color):
     def validate_pawn(color, start, end, board):
         # Different direction allowed for different color
         if color == "black":
-            # check if moving 2 spaces from home row
-            if start[1] - end[1] == -2:
-                if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
-                    return False
-                print("pawn moves 2")
-                return start[1] == 1
-
             # piece moves one space down
             if start[1] - end[1] == -1:
                 # check diagonal attack
@@ -167,7 +159,20 @@ def validate_move(start_pos, end_pos, board, player_color):
                         return False
                     return True
 
-                # moves straight down
+            # if not attacking, pawn must stay in same column
+            if start[0] != end[0]:
+                return False
+
+            # check if moving 2 spaces from home row
+            if start[1] - end[1] == -2:
+                if board.board[end[1]][end[0]] != "x":
+                    print("pawn can only move forward if empty")
+                    return False
+                print("pawn moves 2")
+                return start[1] == 1
+
+            # moves straight down
+            if start[1] - end[1] == -1:
                 # check if end point is empty
                 if board.board[end[1]][end[0]] != "x":
                     print("pawn can only move forward if empty")
@@ -176,14 +181,6 @@ def validate_move(start_pos, end_pos, board, player_color):
             return False
 
         if color == "white":
-            # check if moving 2 spaces from home row
-            if start[1] - end[1] == 2:
-                if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
-                    return False
-                print("pawn moves 2")
-                return start[1] == 6
-
             # piece moves one space down
             if start[1] - end[1] == 1:
                 # check diagonal attack
@@ -194,7 +191,21 @@ def validate_move(start_pos, end_pos, board, player_color):
                         return False
                     return True
 
-                # moves straight down
+            # if not attacking, pawn must stay in same column
+            if start[0] != end[0]:
+                print("if not attacking, pawn must stay in same column")
+                return False
+
+            # check if moving 2 spaces from home row
+            if start[1] - end[1] == 2:
+                if board.board[end[1]][end[0]] != "x":
+                    print("pawn can only move forward if empty")
+                    return False
+                print("pawn moves 2")
+                return start[1] == 6
+
+            # moves straight down
+            if start[1] - end[1] == 1:
                 # check if end point is empty
                 if board.board[end[1]][end[0]] != "x":
                     print("pawn can only move forward if empty")
@@ -371,10 +382,10 @@ def play_game():
         game_not_over = True
         curr_player = "White"
         while game_not_over:
-            game_board.render()
             print(f"{curr_player}'s turn")
             valid_move = False
             while not valid_move:
+                game_board.render()
                 user_input = input("Where would you like to move: ")
                 if user_input.lower() == "forfeit":
                     if curr_player == "White":
@@ -393,14 +404,14 @@ def play_game():
                 else:
                     valid_move = True
                     move_piece(parsed_input[0], parsed_input[1], game_board.board)
-            if curr_player == "White":
+            if curr_player == "White" and game_not_over:
                 if check_check("black", game_board):
                     if check_checkmate("black", game_board):
                         print(f"CHECKMATE! {curr_player} wins!!")
                     else:
                         print("Check!")
                 curr_player = "Black"
-            elif curr_player == "Black":
+            elif curr_player == "Black" and game_not_over:
                 if check_check("white", game_board):
                     if check_checkmate("white", game_board):
                         print(f"CHECKMATE! {curr_player} wins!!")
