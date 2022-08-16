@@ -1,14 +1,25 @@
 class Chessboard:
 
-    def __init__(self):
-        self.board = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                      ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                      ["x", "x", "x", "x", "x", "x", "x", "x"],
-                      ["x", "x", "x", "x", "x", "x", "x", "x"],
-                      ["x", "x", "x", "x", "x", "x", "x", "x"],
-                      ["x", "x", "x", "x", "x", "x", "x", "x"],
-                      ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                      ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    def __init__(self, board=None):
+        if board is not None:
+            self.board = board
+        else:
+            self.board = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                          ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                          ["x", "x", "x", "x", "x", "x", "x", "x"],
+                          ["x", "x", "x", "x", "x", "x", "x", "x"],
+                          ["x", "x", "x", "x", "x", "x", "x", "x"],
+                          ["x", "x", "x", "x", "x", "x", "x", "x"],
+                          ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                          ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+
+    def __deepcopy__(self, memodict={}):
+        copied_board = []
+        for row_idx, row in enumerate(self.board):
+            copied_board.append([])
+            for col_val in row:
+                copied_board[row_idx].append(col_val)
+        return Chessboard(copied_board)
 
     def render(self):
         for i in range(8):
