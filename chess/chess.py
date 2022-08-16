@@ -52,6 +52,48 @@ def parse_input(user_input):
     return tuple(split_input)
 
 
+def check_check(color, board, move=None):
+    def find_king(color, copied_board):
+        for row_idx, row in enumerate(copied_board.board):
+            for col_idx, col_val in enumerate(row):
+                if color:
+                    if col_val == "[K]":
+                        return row_idx, col_idx
+                else:
+                    if col_val == "{K}":
+                        return row_idx, col_idx
+
+    copied_board = copy.deepcopy(board)
+    if move:
+        move_piece(move[0], move[1], copied_board.board, False)
+    king_loc = find_king(color, copied_board)
+    for row_idx, row in enumerate(copied_board.board):
+        for col_idx, col_val in enumerate(row):
+            if color and col_val[0] == "{":
+                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
+                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
+                validate_move(start_pos_text, end_pos_text, copied_board)
+            elif not color and col_val[0] == "[":
+                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
+                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
+                validate_move(start_pos_text, end_pos_text, copied_board)
+
+
+def check_checkmate(color, board):
+    pass
+
+
+def pawn_promotion(end_col, board, curr_color):
+    print('PAWN PROMOTION: What piece would you like to promote to? ("Q", "r", "b", "k")')
+    promotion_type = input("> ")
+    while promotion_type != "Q" and promotion_type != "r" and promotion_type != "b" and promotion_type != "k":
+        print('Please enter valid input ("Q", "r", "b", "k")')
+        promotion_type = input("> ")
+    if curr_color:
+        board[0][end_col] = f"[{promotion_type}]"
+    else:
+        board[7][end_col] = f"{{{promotion_type}}}"
+
 def validate_move(start_pos, end_pos, board, player_color):
     # turn string input into array coordinates
     start_list = list(start_pos)
@@ -206,49 +248,6 @@ def validate_move(start_pos, end_pos, board, player_color):
         return validate_pawn("black", start_coord, end_coord, board)
     elif piece == "[p]":
         return validate_pawn("white", start_coord, end_coord, board)
-
-
-def check_check(color, board, move=None):
-    def find_king(color, copied_board):
-        for row_idx, row in enumerate(copied_board.board):
-            for col_idx, col_val in enumerate(row):
-                if color:
-                    if col_val == "[K]":
-                        return row_idx, col_idx
-                else:
-                    if col_val == "{K}":
-                        return row_idx, col_idx
-
-    copied_board = copy.deepcopy(board)
-    if move:
-        move_piece(move[0], move[1], copied_board.board, False)
-    king_loc = find_king(color, copied_board)
-    for row_idx, row in enumerate(copied_board.board):
-        for col_idx, col_val in enumerate(row):
-            if color and col_val[0] == "{":
-                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
-                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board)
-            elif not color and col_val[0] == "[":
-                start_pos_text = f"{chr(row_idx + 65)}{8 - col_idx}"
-                end_pos_text = f"{chr(king_loc[0] + 65)}{8 - king_loc[1]}"
-                validate_move(start_pos_text, end_pos_text, copied_board)
-
-
-def check_checkmate(color, board):
-    pass
-
-
-def pawn_promotion(end_col, board, curr_color):
-    print('PAWN PROMOTION: What piece would you like to promote to? ("Q", "r", "b", "k")')
-    promotion_type = input("> ")
-    while promotion_type != "Q" and promotion_type != "r" and promotion_type != "b" and promotion_type != "k":
-        print('Please enter valid input ("Q", "r", "b", "k")')
-        promotion_type = input("> ")
-    if curr_color:
-        board[0][end_col] = f"[{promotion_type}]"
-    else:
-        board[7][end_col] = f"{{{promotion_type}}}"
 
 
 def reset(board):
