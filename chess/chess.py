@@ -17,6 +17,7 @@ def welcome_user(first_game):
 def move_piece(start_pos, end_pos, board, real_move=True):
     start_pos = (7 - (int(start_pos[1]) - 1), ord(start_pos[0]) - 65)
     end_pos = (7 - (int(end_pos[1]) - 1), ord(end_pos[0]) - 65)
+    print(f"start {start_pos} end {end_pos}")
     moving_piece = board[start_pos[0]][start_pos[1]]
     moving_piece_color = None
     if moving_piece[0] == "[":
@@ -108,7 +109,6 @@ def find_king(color, copied_board):
                     return row_idx, col_idx
 
 
-
 def pawn_promotion(end_col, board, curr_color):
     print('PAWN PROMOTION: What piece would you like to promote to? ("Q", "r", "b", "k")')
     promotion_type = input("> ")
@@ -119,6 +119,7 @@ def pawn_promotion(end_col, board, curr_color):
         board[0][end_col] = f"[{promotion_type}]"
     else:
         board[7][end_col] = f"{{{promotion_type}}}"
+
 
 def validate_move(start_pos, end_pos, board, player_color):
     # turn string input into array coordinates
