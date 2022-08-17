@@ -214,7 +214,6 @@ def validate_move(start_pos, end_pos, board, player_color):
 
             # if not attacking, pawn must stay in same column
             if start[0] != end[0]:
-                print("if not attacking, pawn must stay in same column")
                 return False
 
             # check if moving 2 spaces from home row
