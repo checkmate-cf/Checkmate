@@ -78,23 +78,23 @@ def check_checkmate(color, board):
     for row_idx, row in enumerate(board.board):
         for col_idx, col_val in enumerate(row):
             if color == "white" and col_val[0] == "[":
-                for move_row_idx, move_row in enumerate(board):
-                    for move_col_idx, move_col_val in enumerate(move_row):
-                        start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
-                        end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
-                        if validate_move(start_pos_text, end_pos_text, board, color):
-                            if not check_check(color, board, (start_pos_text, end_pos_text)):
-                                return False
-                return True
+                if can_stop_checkmate(color, board, row_idx, col_idx):
+                    return False
             elif color == "black" and col_val[0] == "{":
-                for move_row_idx, move_row in enumerate(board):
-                    for move_col_idx, move_col_val in enumerate(move_row):
-                        start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
-                        end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
-                        if validate_move(start_pos_text, end_pos_text, board, color):
-                            if not check_check(color, board, (start_pos_text, end_pos_text)):
-                                return False
-                return True
+                if can_stop_checkmate(color, board, row_idx, col_idx):
+                    return False
+    return True
+
+
+def can_stop_checkmate(color, board, row_idx, col_idx):
+    for move_row_idx, move_row in enumerate(board.board):
+        for move_col_idx, move_col_val in enumerate(move_row):
+            start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
+            end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
+            if validate_move(start_pos_text, end_pos_text, board, color):
+                if not check_check(color, board, (start_pos_text, end_pos_text)):
+                    return True
+    return False
 
 
 def find_king(color, copied_board):
@@ -146,7 +146,7 @@ def validate_move(start_pos, end_pos, board, player_color):
 
     # Get the piece being moved
     piece = get_piece(start_coord)
-    print(f"piece: {piece}")
+    # print(f"piece: {piece}")
 
     # Check if selected space actually has a piece
     if piece == "x":
@@ -155,7 +155,7 @@ def validate_move(start_pos, end_pos, board, player_color):
 
     # Get color of piece being moved
     piece_color = get_color(start_coord)
-    print(f"piece color: {piece_color}")
+    # print(f"piece color: {piece_color}")
 
     # Check if player is moving their own piece
     if not check_color_match(player_color, piece_color):
@@ -429,6 +429,7 @@ def play_game():
                 if check_check("black", game_board):
                     if check_checkmate("black", game_board):
                         print(f"CHECKMATE! {curr_player} wins!!")
+                        game_not_over = False
                     else:
                         print("Check!")
                 curr_player = "Black"
@@ -436,6 +437,7 @@ def play_game():
                 if check_check("white", game_board):
                     if check_checkmate("white", game_board):
                         print(f"CHECKMATE! {curr_player} wins!!")
+                        game_not_over = False
                     else:
                         print("Check!")
                 curr_player = "White"
