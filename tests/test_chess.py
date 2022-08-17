@@ -126,7 +126,7 @@ def test_move_black_pawn_two_not_home():
 
 
 # @pytest.mark.skip("pending")
-def test_move(standard_board):
+def test_move_pawn(standard_board):
     actual = standard_board.board
     c.move_piece("A2", "A3", actual, False)
     expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
@@ -135,7 +135,82 @@ def test_move(standard_board):
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x", "[p]"  , "[p]", "[p]", "[p]", "[p]","[p]", "[p]"],
+                ["x",  "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_knight(standard_board):
+    actual = standard_board.board
+    c.move_piece("B1", "C3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x", "[k]",   "x",   "x",   "x",   "x",   "x"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[r]",  "x",  "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_rook(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("", "", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_bishop(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("", "", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_queen(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("", "", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_king(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("", "", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
                 ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
@@ -208,18 +283,6 @@ def standard_board():
     return standard_board
 
 @pytest.fixture
-def black_in_check_not_checkmate():
-    black_in_check_not_checkmate = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                                                 ["x",  "{p}", "{p}", "{p}", "{p}", "[Q]", "{p}", "{p}"],
-                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                                                 ["{p}",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                                                 ["x",    "x",   "x",   "x",  "[p]",  "x",   "x",   "x"],
-                                                 ["[p]", "[p]", "[p]", "[p]",   "x", "[p]", "[p]", "[p]"],
-                                                 ["[r]", "[k]", "[b]",  "x", "[K]", "[b]", "[k]", "[r]"]])
-    return black_in_check_not_checkmate
-
-@pytest.fixture
 def black_in_checkmate():
     black_in_checkmate = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                                                  ["x",   "{p}", "{p}", "{p}", "{p}", "[Q]", "{p}", "{p}"],
@@ -230,6 +293,31 @@ def black_in_checkmate():
                                                  ["[p]", "[p]", "[p]", "[p]",  "x",  "[p]", "[p]", "[p]"],
                                                  ["[r]", "[k]", "[b]",  "x", "[K]",  "x", "[k]", "[r]"]])
     return black_in_checkmate
+
+
+@pytest.fixture
+def pawns_forward_board():
+    pawns_forward_board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                                        ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                        ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                        ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                                        ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                                        ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                        ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                        ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]])
+    return pawns_forward_board
+
+@pytest.fixture
+def black_in_check_not_checkmate():
+    black_in_check_not_checkmate = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                                                 ["x",  "{p}", "{p}", "{p}", "{p}", "[Q]", "{p}", "{p}"],
+                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                                 ["{p}",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                                 ["x",    "x",   "x",   "x",  "[p]",  "x",   "x",   "x"],
+                                                 ["[p]", "[p]", "[p]", "[p]",   "x", "[p]", "[p]", "[p]"],
+                                                 ["[r]", "[k]", "[b]",  "x", "[K]", "[b]", "[k]", "[r]"]])
+    return black_in_check_not_checkmate
 
 
 @pytest.fixture
