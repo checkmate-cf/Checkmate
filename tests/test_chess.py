@@ -10,12 +10,14 @@ def test_move_white_pawn_one():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
 def test_move_white_pawn_two():
     board = b.Chessboard()
     actual = c.validate_move("A2", "A4", board, "white")
     expected = True
     assert actual == expected
+
 
 # @pytest.mark.skip("pending")
 def test_move_white_pawn_one_blocked():
@@ -31,6 +33,7 @@ def test_move_white_pawn_one_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
 def test_move_white_pawn_two_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
@@ -45,11 +48,14 @@ def test_move_white_pawn_two_blocked():
     expected = False
     assert actual == expected
 
+
+# @pytest.mark.skip("pending")
 def test_move_black_pawn_one():
     board = b.Chessboard()
     actual = c.validate_move("A7", "A6", board, "black")
     expected = True
     assert actual == expected
+
 
 # @pytest.mark.skip("pending")
 def test_move_black_pawn_two():
@@ -57,6 +63,7 @@ def test_move_black_pawn_two():
     actual = c.validate_move("A7", "A5", board, "black")
     expected = True
     assert actual == expected
+
 
 # @pytest.mark.skip("pending")
 def test_move_black_pawn_one_blocked():
@@ -72,6 +79,7 @@ def test_move_black_pawn_one_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
 def test_move_black_pawn_two_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
@@ -85,6 +93,7 @@ def test_move_black_pawn_two_blocked():
     actual = c.validate_move("A7", "A5", board, "black")
     expected = False
     assert actual == expected
+
 
 # @pytest.mark.skip("pending")
 def test_move_white_pawn_two_not_home():
@@ -100,6 +109,7 @@ def test_move_white_pawn_two_not_home():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
 def test_move_black_pawn_two_not_home():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
@@ -114,11 +124,11 @@ def test_move_black_pawn_two_not_home():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
 def test_move(standard_board):
-    c.move("a2", "a3", standard_board, False)
-    actual = standard_board
-    print(f"actual: {actual}")
+    actual = standard_board.board
+    c.move_piece("A2", "A3", actual, False)
     expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                 ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
@@ -127,7 +137,7 @@ def test_move(standard_board):
                 ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x", "[p]"  , "[p]", "[p]", "[p]", "[p]","[p]", "[p]"],
                 ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-assert actual.board == expected
+    assert actual == expected
 
 
 # @pytest.mark.skip("pending")
