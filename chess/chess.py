@@ -1,4 +1,4 @@
-from board import Chessboard
+from chess.board import Chessboard
 import re
 import copy
 
@@ -442,5 +442,5 @@ def play_game():
                         print("Check!")
                 curr_player = "White"
 
-
-play_game()
+if __name__ == '__main__':
+    play_game()
