@@ -75,7 +75,6 @@ def check_check(color, board, move=None):
 
 
 def check_checkmate(color, board):
-    king_loc = find_king(color, board)
     for row_idx, row in enumerate(board.board):
         for col_idx, col_val in enumerate(row):
             if color == "white" and col_val[0] == "[":
