@@ -1113,6 +1113,19 @@ def test_move_king(pawns_forward_board):
                 ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
+# @pytest.mark.skip("pending")
+def test_find_black_king(standard_board):
+    actual = c.find_king("black", standard_board)
+    expected = (0, 4)
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_find_white_king(standard_board):
+    actual = c.find_king("white", standard_board)
+    expected = (7, 4)
+    assert actual == expected
+
 
 # @pytest.mark.skip("pending")
 def test_black_king_not_check(standard_board):
