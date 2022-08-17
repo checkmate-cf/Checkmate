@@ -428,6 +428,7 @@ def play_game():
             if curr_player == "White" and game_not_over:
                 if check_check("black", game_board):
                     if check_checkmate("black", game_board):
+                        game_board.render()
                         print(f"CHECKMATE! {curr_player} wins!!")
                         game_not_over = False
                     else:
@@ -436,6 +437,7 @@ def play_game():
             elif curr_player == "Black" and game_not_over:
                 if check_check("white", game_board):
                     if check_checkmate("white", game_board):
+                        game_board.render()
                         print(f"CHECKMATE! {curr_player} wins!!")
                         game_not_over = False
                     else:
