@@ -54,16 +54,6 @@ def parse_input(user_input):
 
 
 def check_check(color, board, move=None):
-    def find_king(color, copied_board):
-        for row_idx, row in enumerate(copied_board.board):
-            for col_idx, col_val in enumerate(row):
-                if color == "white":
-                    if col_val == "[K]":
-                        return row_idx, col_idx
-                else:
-                    if col_val == "{K}":
-                        return row_idx, col_idx
-
     search_board = board
     if move:
         search_board = copy.deepcopy(board)
@@ -85,7 +75,39 @@ def check_check(color, board, move=None):
 
 
 def check_checkmate(color, board):
-    return False
+    king_loc = find_king(color, board)
+    for row_idx, row in enumerate(board.board):
+        for col_idx, col_val in enumerate(row):
+            if color == "white" and col_val[0] == "[":
+                for move_row_idx, move_row in enumerate(board):
+                    for move_col_idx, move_col_val in enumerate(move_row):
+                        start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
+                        end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
+                        if validate_move(start_pos_text, end_pos_text, board, color):
+                            if not check_check(color, board, (start_pos_text, end_pos_text)):
+                                return False
+                return True
+            elif color == "black" and col_val[0] == "{":
+                for move_row_idx, move_row in enumerate(board):
+                    for move_col_idx, move_col_val in enumerate(move_row):
+                        start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
+                        end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
+                        if validate_move(start_pos_text, end_pos_text, board, color):
+                            if not check_check(color, board, (start_pos_text, end_pos_text)):
+                                return False
+                return True
+
+
+def find_king(color, copied_board):
+    for row_idx, row in enumerate(copied_board.board):
+        for col_idx, col_val in enumerate(row):
+            if color == "white":
+                if col_val == "[K]":
+                    return row_idx, col_idx
+            else:
+                if col_val == "{K}":
+                    return row_idx, col_idx
+
 
 
 def pawn_promotion(end_col, board, curr_color):
