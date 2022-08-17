@@ -114,6 +114,21 @@ def test_move_black_pawn_two_not_home():
     expected = False
     assert actual == expected
 
+# @pytest.mark.skip("pending")
+def test_move(standard_board):
+    c.move("a2", "a3", standard_board, False)
+    actual = standard_board
+    print(f"actual: {actual}")
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x", "[p]"  , "[p]", "[p]", "[p]", "[p]","[p]", "[p]"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+assert actual.board == expected
+
 
 # @pytest.mark.skip("pending")
 def test_black_king_not_check(standard_board):
@@ -137,8 +152,36 @@ def test_black_king_check_not_checkmate(black_in_check_not_checkmate):
 
 
 # @pytest.mark.skip("pending")
-def test_black_king_checkmate(black_in_checkmate):
-    actual = c.check_checkmate("black", black_in_checkmate)
+def test_white_king_checkmate(white_in_checkmate):
+    actual = c.check_checkmate("white", black_in_checkmate)
+    expected = True
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_not_check(standard_board):
+    actual = c.check_check("white", standard_board)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_check(white_in_check_not_checkmate):
+    actual = c.check_check("white", white_in_check_not_checkmate)
+    expected = True
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_check_not_checkmate(white_in_check_not_checkmate):
+    actual = c.check_checkmate("white", white_in_check_not_checkmate)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_checkmate(white_in_checkmate):
+    actual = c.check_checkmate("white", white_in_checkmate)
     expected = True
     assert actual == expected
 
@@ -168,7 +211,7 @@ def black_in_check_not_checkmate():
 
 @pytest.fixture
 def black_in_checkmate():
-    black_in_check_not_checkmate = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+    black_in_checkmate = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                                                  ["x",   "{p}", "{p}", "{p}", "{p}", "[Q]", "{p}", "{p}"],
                                                  ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                                                  ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
@@ -176,4 +219,29 @@ def black_in_checkmate():
                                                  ["x",    "x",   "x",   "x",  "[p]",  "x",   "x",   "x"],
                                                  ["[p]", "[p]", "[p]", "[p]",  "x",  "[p]", "[p]", "[p]"],
                                                  ["[r]", "[k]", "[b]",  "x", "[K]",  "x", "[k]", "[r]"]])
-    return black_in_check_not_checkmate
+    return black_in_checkmate
+
+
+@pytest.fixture
+def white_in_check_not_checkmate():
+    white_in_check_not_checkmate = b.Chessboard([["{r}", "{k}", "{b}",   "x" , "{K}", "{b}", "{k}", "{r}"],
+                                                 ["{p}",  "{p}", "{p}", "{p}", "x"  , "{p}", "{p}", "{p}"],
+                                                 ["x",    "[p]", "x",   "x",   "{p}", "x",   "x",   "x"],
+                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                                 ["x",    "x",   "x",   "x",    "x",  "x",   "x",   "x"],
+                                                 ["[p]", "x"  , "[p]", "[p]", "[p]", "{Q}", "[p]","[p]"],
+                                                 ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]])
+    return white_in_check_not_checkmate
+
+@pytest.fixture
+def white_in_checkmate():
+    white_in_checkmate = b.Chessboard([["{r}", "{k}", "{b}",   "x" , "{K}", "x"  , "{k}", "{r}"],
+                                       ["{p}",  "{p}", "{p}", "{p}", "x"  , "{p}", "{p}", "{p}"],
+                                       ["x",    "[p]", "x",   "x",   "{p}", "x",   "x",   "x"],
+                                       ["x",    "x",   "{b}", "x",   "x",   "x",   "x",   "x"],
+                                       ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                                       ["x",    "x",   "[p]", "x",    "x",  "x",   "x",   "x"],
+                                       ["[p]", "x"  , "x"  , "[p]", "[p]", "{Q}", "[p]","[p]"],
+                                       ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]])
+    return white_in_checkmate
