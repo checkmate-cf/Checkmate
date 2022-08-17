@@ -128,29 +128,13 @@ def test_move_black_pawn_two_not_home():
 # @pytest.mark.skip("pending")
 def test_move_pawn(standard_board):
     actual = standard_board.board
-    c.move_piece("A2", "A3", actual, False)
+    c.move_piece("A2", "A4", actual, False)
     expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                 ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",  "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_not_move_pawn(standard_board):
-    actual = standard_board.board
-    c.move_piece("A2", "A1", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[p]",  "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x",   "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
                 ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
@@ -164,24 +148,9 @@ def test_move_knight(standard_board):
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x", "[k]",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",  "[k]",  "x",   "x",   "x",   "x",   "x"],
                 ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
                 ["[r]",  "x",  "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_not_move_knight(standard_board):
-    actual = standard_board.board
-    c.move_piece("B1", "B2", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x", "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]",  "[K]",  "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
 
@@ -194,24 +163,9 @@ def test_move_rook(pawns_forward_board):
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
                 ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[r]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_not_move_rook(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("A1", "B2", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+                ["x",   "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
 
@@ -224,24 +178,9 @@ def test_move_bishop(pawns_forward_board):
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
                 ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[b]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[b]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
                 ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[r]", "[k]", "x", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_not_move_bishop(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("C1", "D1", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+                ["[r]", "[k]",  "x",  "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
 
@@ -260,22 +199,6 @@ def test_move_queen(pawns_forward_board):
     assert actual == expected
 
 
-
-# @pytest.mark.skip("pending")
-def test_not_move_queen(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("D1", "B1", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
 # @pytest.mark.skip("pending")
 def test_move_king(pawns_forward_board):
     actual = pawns_forward_board.board
@@ -288,21 +211,6 @@ def test_move_king(pawns_forward_board):
                 ["x", "x", "x", "x", "x", "x", "x", "x"],
                 ["x", "x", "x", "x", "[K]", "x", "x", "x"],
                 ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_not_move_king(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("E1", "D1", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
     assert actual == expected
 
 
