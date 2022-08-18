@@ -64,12 +64,12 @@ def check_check(color, board, move=None):
             if color == "white" and col_val[0] == "{":
                 start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
                 end_pos_text = f"{chr(king_loc[1] + 65)}{8 - king_loc[0]}"
-                if validate_move(start_pos_text, end_pos_text, search_board, "black", False):
+                if validate_move(start_pos_text, end_pos_text, search_board, "black"):
                     return True
             elif color == "black" and col_val[0] == "[":
                 start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
                 end_pos_text = f"{chr(king_loc[1] + 65)}{8 - king_loc[0]}"
-                if validate_move(start_pos_text, end_pos_text, search_board, "white", False):
+                if validate_move(start_pos_text, end_pos_text, search_board, "white"):
                     return True
     return False
 
@@ -91,7 +91,7 @@ def can_stop_checkmate(color, board, row_idx, col_idx):
         for move_col_idx, move_col_val in enumerate(move_row):
             start_pos_text = f"{chr(col_idx + 65)}{8 - row_idx}"
             end_pos_text = f"{chr(move_col_idx + 65)}{8 - move_row_idx}"
-            if validate_move(start_pos_text, end_pos_text, board, color, False):
+            if validate_move(start_pos_text, end_pos_text, board, color):
                 if not check_check(color, board, (start_pos_text, end_pos_text)):
                     return True
     return False
@@ -120,7 +120,7 @@ def pawn_promotion(end_col, board, curr_color):
         board[7][end_col] = f"{{{promotion_type}}}"
 
 
-def validate_move(start_pos, end_pos, board, player_color, provide_feedback):
+def validate_move(start_pos, end_pos, board, player_color, provide_feedback=False):
     # turn string input into array coordinates
     start_list = list(start_pos)
     end_list = list(end_pos)
@@ -325,7 +325,7 @@ def validate_move(start_pos, end_pos, board, player_color, provide_feedback):
                         return False
                     col += 1
                     row += 1
-                    spaces -=1
+                    spaces -= 1
                 return True
             # moving up
             else:
@@ -350,7 +350,7 @@ def validate_move(start_pos, end_pos, board, player_color, provide_feedback):
                         return False
                     col -= 1
                     row += 1
-                    spaces -=1
+                    spaces -= 1
                 return True
             # moving up
             else:
@@ -420,14 +420,16 @@ def play_game():
                     break
                 parsed_input = parse_input(user_input)
                 if not parsed_input:
-                    print('Please answer in the format "B2 B3". Must be in range A-H and 1-8')
+                    print(
+                        'Please answer in the format "B2 B3". Must be in range A-H and 1-8')
                 elif not validate_move(parsed_input[0], parsed_input[1], game_board, curr_player.lower(), True):
                     print('Move not possible')
                 elif check_check(curr_player.lower(), game_board, parsed_input):
                     print("You may not cause your own king to be put in check")
                 else:
                     valid_move = True
-                    move_piece(parsed_input[0], parsed_input[1], game_board.board)
+                    move_piece(parsed_input[0],
+                               parsed_input[1], game_board.board)
             if curr_player == "White" and game_not_over:
                 if check_check("black", game_board):
                     if check_checkmate("black", game_board):
@@ -446,6 +448,7 @@ def play_game():
                     else:
                         print("Check!")
                 curr_player = "White"
+
 
 if __name__ == '__main__':
     play_game()
