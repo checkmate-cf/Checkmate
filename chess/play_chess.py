@@ -100,7 +100,7 @@ def setup_UI():
         "black-knight": pygame.image.load("chess/icons/black-knight.png"),
         "black-pawn": pygame.image.load("chess/icons/black-pawn.png"),
     }
-    LETTER_FONT = pygame.font.SysFont('comicsans', 32)
+    LETTER_FONT = pygame.font.SysFont('comicsans', 20)
     return clock, screen, surface, images, LETTER_FONT
 
 
@@ -170,8 +170,8 @@ def play_chess():
         res_text = LETTER_FONT.render(reset, 1, (0, 0, 0))
         screen.blit(surface, (0, 0))
         blit_pieces(screen, images, game_board)
-        screen.blit(pytext, (75, 524))
-        screen.blit(res_text, (320, 524))
+        screen.blit(pytext, (75, 518))
+        screen.blit(res_text, (320, 518))
         pygame.display.update()
 
 

@@ -32,3 +32,10 @@ MVP
 ### CLI Chess Board
 
 ![Chess Board Model: CLI](img/Chess%20Board%20Model.png)
+
+## Resources and References
+
+### Pygame Tutorials
+
+[Snake Tutorial](https://www.youtube.com/watch?v=9bBgyOkoBQ0&amp;t=365s)
+[Hangman Tutorial](https://www.youtube.com/watch?v=W6cjx7t39d4&amp;t=1458s)
