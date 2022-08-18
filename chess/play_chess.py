@@ -4,7 +4,7 @@ import chess.chess as chess
 from chess.board import Chessboard
 
 SCREEN_WIDTH = 480
-SCREEN_HEIGHT = 480
+SCREEN_HEIGHT = 600
 
 starter_board = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                 ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
@@ -15,20 +15,26 @@ starter_board = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                 ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
                 ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
 
-GRIDSIZE = 8  # 8 x 8 Chessboard
-GRID_WIDTH = SCREEN_HEIGHT / GRIDSIZE
-GRID_HEIGHT = SCREEN_WIDTH / GRIDSIZE
+BOARD_SQUARE_COUNT = 8  # 8 x 8 Chessboard
+BOARD_HEIGHT = 480
+BOARD_WIDTH = 480
+GRID_WIDTH = BOARD_HEIGHT / BOARD_SQUARE_COUNT
+GRID_HEIGHT = BOARD_WIDTH / BOARD_SQUARE_COUNT
 
 
 def draw_grid(surface):
-    for row in range(0, int(GRID_HEIGHT)):
-        for col in range(0, int(GRID_WIDTH)):
+    for row in range(0, BOARD_SQUARE_COUNT):
+        for col in range(0, BOARD_SQUARE_COUNT):
             if (row + col) % 2 == 0:
                 r = pygame.Rect((col*GRID_WIDTH, row*GRID_HEIGHT), (GRID_WIDTH, GRID_HEIGHT))
                 pygame.draw.rect(surface, (155, 155, 155), r)
             else:
                 r = pygame.Rect((col*GRID_WIDTH, row*GRID_HEIGHT), (GRID_WIDTH, GRID_HEIGHT))
                 pygame.draw.rect(surface, (255, 255, 255), r)
+        r1 = pygame.Rect((0, BOARD_HEIGHT + 2), (SCREEN_WIDTH, 118))
+        pygame.draw.rect(surface, (255, 255, 255), r1)
+        r2 = pygame.Rect((310, 514), (80, 40))
+        pygame.draw.rect(surface, (0, 0, 0), r2, 2)
 
 
 def handle_mouse():
@@ -94,22 +100,23 @@ def setup_UI():
         "black-knight": pygame.image.load("chess/icons/black-knight.png"),
         "black-pawn": pygame.image.load("chess/icons/black-pawn.png"),
     }
-    return clock, screen, surface, images
+    LETTER_FONT = pygame.font.SysFont('comicsans', 32)
+    return clock, screen, surface, images, LETTER_FONT
 
 
 def play_chess():
     pygame.init()
-    clock, screen, surface, images = setup_UI()
+    clock, screen, surface, images, LETTER_FONT = setup_UI()
 
     game_board = Chessboard()
     game_running = True
     curr_player = "White"
     start_space = None
-    while game_running:
+    while True:
         clock.tick(10)
         clicked_coordinates = handle_mouse()
         if clicked_coordinates:
-            if clicked_coordinates[0] <= 480:
+            if clicked_coordinates[1] <= 480 and game_running:
                 if start_space:
                     end_space = int(clicked_coordinates[0] // GRID_WIDTH), int(clicked_coordinates[1] // GRID_HEIGHT)
                     start_pos_text = f"{chr(start_space[0] + 65)}{8 - start_space[1]}"
@@ -125,6 +132,8 @@ def play_chess():
                                 if chess.check_checkmate("black", game_board):
                                     print(f"CHECKMATE! {curr_player} wins!!\n")
                                     game_running = False
+                                    draw_grid(surface)
+                                    continue
                                 else:
                                     print("Check!")
                             curr_player = "Black"
@@ -133,6 +142,8 @@ def play_chess():
                                 if chess.check_checkmate("white", game_board):
                                     print(f"CHECKMATE! {curr_player} wins!!\n")
                                     game_running = False
+                                    draw_grid(surface)
+                                    continue
                                 else:
                                     print("Check!")
                             curr_player = "White"
@@ -142,8 +153,25 @@ def play_chess():
                     start_space = int(clicked_coordinates[0] // GRID_WIDTH), int(clicked_coordinates[1] // GRID_HEIGHT)
                     r = pygame.Rect((start_space[0] * GRID_WIDTH, start_space[1] * GRID_HEIGHT), (GRID_WIDTH, GRID_HEIGHT))
                     pygame.draw.rect(surface, (255, 0, 0), r, 3)
+            else:
+                if 514 <= clicked_coordinates[1] <= 554 and 310 <= clicked_coordinates[0] <= 390:
+                    print("Reset")
+                    game_board = Chessboard()
+                    curr_player = "White"
+                    start_space = None
+                    game_running = True
+                    draw_grid(surface)
+        if game_running:
+            message_text = f"{curr_player}'s Turn"
+        else:
+            message_text = f"{curr_player} Wins!!"
+        pytext = LETTER_FONT.render(message_text, 1, (0, 0, 0))
+        reset = "Reset"
+        res_text = LETTER_FONT.render(reset, 1, (0, 0, 0))
         screen.blit(surface, (0, 0))
         blit_pieces(screen, images, game_board)
+        screen.blit(pytext, (75, 524))
+        screen.blit(res_text, (320, 524))
         pygame.display.update()
 
 
