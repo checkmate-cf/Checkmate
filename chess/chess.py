@@ -1,17 +1,5 @@
-from chess.board import Chessboard
 import re
 import copy
-
-
-def welcome_user(first_game):
-    if first_game:
-        print("Welcome to Checkmate, the ultimate destination for playing chess!!\n")
-    print("Would you like to play chess? y/n ")
-    user_input = input("> ").lower()
-    while user_input != "y" and user_input != "n":
-        print('Must enter valid response: "y" or "n", try again')
-        user_input = input("> ").lower()
-    return user_input == "y"
 
 
 def move_piece(start_pos, end_pos, board, real_move=True):
@@ -395,60 +383,3 @@ def validate_move(start_pos, end_pos, board, player_color, provide_feedback=Fals
 
 def reset(board):
     board.__init__()
-
-
-def play_game():
-    first_game = True
-    while welcome_user(first_game):
-        first_game = False
-        print('Let the games begin, if at any point you want to quit, type "Forfeit"')
-        game_board = Chessboard()
-        game_not_over = True
-        curr_player = "White"
-        while game_not_over:
-            print(f"{curr_player}'s turn")
-            valid_move = False
-            while not valid_move:
-                game_board.render()
-                user_input = input("Where would you like to move: ")
-                if user_input.lower() == "forfeit":
-                    if curr_player == "White":
-                        print("Black Wins!!\n")
-                    else:
-                        print("White Wins!!\n")
-                    game_not_over = False
-                    break
-                parsed_input = parse_input(user_input)
-                if not parsed_input:
-                    print(
-                        'Please answer in the format "B2 B3". Must be in range A-H and 1-8')
-                elif not validate_move(parsed_input[0], parsed_input[1], game_board, curr_player.lower(), True):
-                    print('Move not possible')
-                elif check_check(curr_player.lower(), game_board, parsed_input):
-                    print("You may not cause your own king to be put in check")
-                else:
-                    valid_move = True
-                    move_piece(parsed_input[0],
-                               parsed_input[1], game_board.board)
-            if curr_player == "White" and game_not_over:
-                if check_check("black", game_board):
-                    if check_checkmate("black", game_board):
-                        game_board.render()
-                        print(f"CHECKMATE! {curr_player} wins!!\n")
-                        game_not_over = False
-                    else:
-                        print("Check!")
-                curr_player = "Black"
-            elif curr_player == "Black" and game_not_over:
-                if check_check("white", game_board):
-                    if check_checkmate("white", game_board):
-                        game_board.render()
-                        print(f"CHECKMATE! {curr_player} wins!!\n")
-                        game_not_over = False
-                    else:
-                        print("Check!")
-                curr_player = "White"
-
-
-if __name__ == '__main__':
-    play_game()
