@@ -2,6 +2,8 @@ import pygame
 import sys
 import chess.chess as chess
 from chess.board import Chessboard
+import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 SCREEN_WIDTH = 480
 SCREEN_HEIGHT = 480
@@ -99,6 +101,8 @@ def setup_UI():
 
 def play_chess():
     pygame.init()
+
+
     clock, screen, surface, images = setup_UI()
 
     game_board = Chessboard()
