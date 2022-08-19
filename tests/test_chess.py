@@ -50,9 +50,8 @@ def test_validate_move_white_pawn_two_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_pawn_one():
     board = b.Chessboard()
     actual = c.validate_move("A7", "A6", board, "black")
@@ -131,27 +130,24 @@ def test_validate_move_black_pawn_two_not_home():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_pawn_diagonal():
     board = b.Chessboard()
     actual = c.validate_move("A2", "B3", board, "white")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_pawn_diagonal():
     board = b.Chessboard()
     actual = c.validate_move("A7", "B6", board, "black")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_pawn_diagonal_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -166,9 +162,8 @@ def test_validate_move_white_pawn_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_pawn_diagonal_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -183,9 +178,8 @@ def test_validate_move_black_pawn_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_pawn_backward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -200,9 +194,8 @@ def test_validate_move_white_pawn_backward():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_pawn_backward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "x", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
@@ -216,9 +209,8 @@ def test_validate_move_black_pawn_backward():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_pawn_sideways():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -233,9 +225,8 @@ def test_validate_move_white_pawn_sideways():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_pawn_sideways():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "x", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
@@ -249,9 +240,8 @@ def test_validate_move_black_pawn_sideways():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_forward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -266,9 +256,8 @@ def test_validate_move_white_rook_forward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_forward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -283,9 +272,8 @@ def test_validate_move_black_rook_forward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_backward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -300,9 +288,8 @@ def test_validate_move_white_rook_backward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_backward():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -317,9 +304,8 @@ def test_validate_move_black_rook_backward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_sideways():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -334,9 +320,8 @@ def test_validate_move_white_rook_sideways():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_sideways():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -351,45 +336,40 @@ def test_validate_move_black_rook_sideways():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_forward_blocked():
     board = b.Chessboard()
     actual = c.validate_move("A1", "A5", board, "white")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_forward_blocked():
     board = b.Chessboard()
     actual = c.validate_move("A8", "A4", board, "black")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_sideways_blocked():
     board = b.Chessboard()
     actual = c.validate_move("A1", "F1", board, "white")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_sideways_blocked():
     board = b.Chessboard()
     actual = c.validate_move("A8", "F8", board, "black")
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_forward_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -404,9 +384,8 @@ def test_validate_move_white_rook_forward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_forward_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -421,9 +400,8 @@ def test_validate_move_black_rook_forward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_sideways_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "x", "{p}", "{p}", "{p}", "{p}", "{p}"],
@@ -437,9 +415,8 @@ def test_validate_move_white_rook_sideways_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_sideways_attack():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -454,9 +431,8 @@ def test_validate_move_black_rook_sideways_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_rook_diagonal():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -471,9 +447,8 @@ def test_validate_move_white_rook_diagonal():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_rook_diagonal():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -488,9 +463,8 @@ def test_validate_move_black_rook_diagonal():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_forward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -505,9 +479,8 @@ def test_validate_move_white_king_forward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_forward():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -522,9 +495,8 @@ def test_validate_move_black_king_forward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_backward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -539,9 +511,8 @@ def test_validate_move_white_king_backward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_backward():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -556,9 +527,8 @@ def test_validate_move_black_king_backward():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_sideways():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -573,9 +543,8 @@ def test_validate_move_white_king_sideways():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_sideways():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -590,9 +559,8 @@ def test_validate_move_black_king_sideways():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_diagonal():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -607,9 +575,8 @@ def test_validate_move_white_king_diagonal():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_diagonal():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -624,9 +591,8 @@ def test_validate_move_black_king_diagonal():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_forward_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -641,9 +607,8 @@ def test_validate_move_white_king_forward_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_forward_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "x", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -658,9 +623,8 @@ def test_validate_move_black_king_forward_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_backward_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -675,9 +639,8 @@ def test_validate_move_white_king_backward_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_backward_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "x", "{p}", "{p}", "{p}"],
@@ -691,9 +654,8 @@ def test_validate_move_black_king_backward_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_sideways_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -708,9 +670,8 @@ def test_validate_move_white_king_sideways_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_sideways_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "{p}", "{p}", "x", "{p}"],
@@ -724,9 +685,8 @@ def test_validate_move_black_king_sideways_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_diagonal_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -741,9 +701,8 @@ def test_validate_move_white_king_diagonal_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_diagonal_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "{p}", "x", "{p}", "{p}"],
@@ -757,9 +716,8 @@ def test_validate_move_black_king_diagonal_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_forward_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "x", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -774,9 +732,8 @@ def test_validate_move_white_king_forward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_forward_attack():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -791,9 +748,8 @@ def test_validate_move_black_king_forward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_backward_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -808,9 +764,8 @@ def test_validate_move_white_king_backward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_backward_attack():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "x", "{p}", "{p}", "{p}"],
@@ -824,9 +779,8 @@ def test_validate_move_black_king_backward_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_sideways_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -841,9 +795,8 @@ def test_validate_move_white_king_sideways_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_sideways_attack():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "{p}", "{p}", "x", "{p}"],
@@ -857,9 +810,8 @@ def test_validate_move_black_king_sideways_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_diagonal_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -874,9 +826,8 @@ def test_validate_move_white_king_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_diagonal_attack():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "{p}", "x", "{p}", "{p}"],
@@ -890,9 +841,8 @@ def test_validate_move_black_king_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_forward_two():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -907,9 +857,8 @@ def test_validate_move_white_king_forward_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_forward_two():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -924,9 +873,8 @@ def test_validate_move_black_king_forward_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_backward_two():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -941,9 +889,8 @@ def test_validate_move_white_king_backward_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_backward_two():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "x", "{p}", "{p}", "{p}"],
@@ -957,9 +904,8 @@ def test_validate_move_black_king_backward_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_sideways_two():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -974,9 +920,8 @@ def test_validate_move_white_king_sideways_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_sideways_two():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -991,9 +936,8 @@ def test_validate_move_black_king_sideways_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_king_diagonal_two():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1008,9 +952,8 @@ def test_validate_move_white_king_diagonal_two():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_king_diagonal_two():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "{p}", "{p}", "x", "{p}"],
@@ -1022,132 +965,8 @@ def test_validate_move_black_king_diagonal_two():
                           ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]])
     actual = c.validate_move("E5", "G7", board, "black")
 
-# @pytest.mark.skip("pending")
-
-
-def test_move_pawn(standard_board):
-    actual = standard_board.board
-    c.move_piece("A2", "A3", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",  "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
 
 # @pytest.mark.skip("pending")
-def test_move_knight(standard_board):
-    actual = standard_board.board
-    c.move_piece("B1", "C3", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x", "[k]",   "x",   "x",   "x",   "x",   "x"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]",  "x",  "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_move_rook(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("A1", "A3", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[r]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_move_bishop(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("C1", "A3", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["[b]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
-                ["[r]", "[k]", "x", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_move_queen(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("D1", "F3", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x", "x", "x", "x", "x", "[Q]", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["[r]", "[k]", "[b]", "x", "[K]", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_move_king(pawns_forward_board):
-    actual = pawns_forward_board.board
-    c.move_piece("E1", "E2", actual, False)
-    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
-                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
-                ["x", "x", "x", "x", "x", "x", "x", "x"],
-                ["x", "x", "x", "x", "[K]", "x", "x", "x"],
-                ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]]
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-def test_find_black_king(standard_board):
-    actual = c.find_king("black", standard_board)
-    expected = (0, 4)
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_find_white_king(standard_board):
-    actual = c.find_king("white", standard_board)
-    expected = (7, 4)
-    assert actual == expected
-
-
-# @pytest.mark.skip("pending")
-def test_black_king_not_check(standard_board):
-    actual = c.check_check("black", standard_board)
-    expected = False
-    assert actual == expected
-
-
-def test_black_king_check(black_in_check_not_checkmate):
-    actual = c.check_check("black", black_in_check_not_checkmate)
-    expected = True
-    assert actual == expected
-
-
-def test_black_king_check_not_checkmate(black_in_check_not_checkmate):
-    actual = c.check_checkmate("black", black_in_check_not_checkmate)
-    expected = False
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_queen_forward():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1160,9 +979,8 @@ def test_validate_move_white_queen_forward():
                           ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]])
     actual = c.validate_move("E4", "E5", board, "white")
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_queen_forward():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -1287,9 +1105,8 @@ def test_validate_move_white_queen_forward_blocked():
                           ["[r]", "[k]", "[b]", "x", "x", "[b]", "[k]", "[r]"]])
     actual = c.validate_move("E4", "E5", board, "white")
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_queen_forward_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "x", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}",
@@ -1302,49 +1119,8 @@ def test_validate_move_black_queen_forward_blocked():
                           ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]])
     actual = c.validate_move("E5", "E4", board, "black")
 
-# @pytest.mark.skip("pending")
-
-
-def test_white_king_checkmate(white_in_checkmate):
-    actual = c.check_checkmate("white", black_in_checkmate)
-    expected = True
-    assert actual == expected
 
 # @pytest.mark.skip("pending")
-
-
-def test_white_king_not_check(standard_board):
-    actual = c.check_check("white", standard_board)
-    expected = False
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-
-
-def test_white_king_check(white_in_check_not_checkmate):
-    actual = c.check_check("white", white_in_check_not_checkmate)
-    expected = True
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-
-
-def test_white_king_check_not_checkmate(white_in_check_not_checkmate):
-    actual = c.check_checkmate("white", white_in_check_not_checkmate)
-    expected = False
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-
-
-def test_white_king_checkmate(white_in_checkmate):
-    actual = c.check_checkmate("white", white_in_checkmate)
-    expected = True
-    assert actual == expected
-
-# @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_queen_backward_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1357,9 +1133,8 @@ def test_validate_move_white_queen_backward_blocked():
                           ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]])
     actual = c.validate_move("E4", "E3", board, "white")
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_queen_backward_blocked():
     board = b.Chessboard([["x", "{k}", "{b}", "{Q}", "x", "{b}", "{k}", "{r}"],
                           ["{r}", "{p}", "{p}", "{p}", "x", "{p}", "{p}", "{p}"],
@@ -1686,9 +1461,8 @@ def test_validate_move_black_queen_diagonal_three():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_diagonal():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1703,9 +1477,8 @@ def test_validate_move_white_bishop_diagonal():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_diagonal():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -1720,9 +1493,8 @@ def test_validate_move_black_bishop_diagonal():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_diagonal_three():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1737,9 +1509,8 @@ def test_validate_move_white_bishop_diagonal_three():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_diagonal_three():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -1754,9 +1525,8 @@ def test_validate_move_black_bishop_diagonal_three():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_diagonal_blocked():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1771,9 +1541,8 @@ def test_validate_move_white_bishop_diagonal_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_diagonal_blocked():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -1788,9 +1557,8 @@ def test_validate_move_black_bishop_diagonal_blocked():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_diagonal_attack():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1805,9 +1573,8 @@ def test_validate_move_white_bishop_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_diagonal_attack():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -1822,9 +1589,8 @@ def test_validate_move_black_bishop_diagonal_attack():
     expected = True
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_vertical():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1839,9 +1605,8 @@ def test_validate_move_white_bishop_vertical():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_vertical():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -1856,9 +1621,8 @@ def test_validate_move_black_bishop_vertical():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_white_bishop_horizontal():
     board = b.Chessboard([["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["{p}", "{p}", "{p}", "{p}",
@@ -1873,9 +1637,8 @@ def test_validate_move_white_bishop_horizontal():
     expected = False
     assert actual == expected
 
+
 # @pytest.mark.skip("pending")
-
-
 def test_validate_move_black_bishop_horizontal():
     board = b.Chessboard([["{r}", "{k}", "x", "{Q}", "{K}", "{b}", "{k}", "{r}"],
                           ["x", "{p}", "{p}", "{p}",
@@ -2050,6 +1813,166 @@ def test_validate_move_black_knight_attack(start, end, expected):
                           ["x", "x", "[p]", "x", "[p]", "x", "x", "x"],
                           ["x", "x", "x", "x", "x", "x", "x", "x"]])
     actual = c.validate_move(start, end, board, "black")
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_pawn(standard_board):
+    actual = standard_board.board
+    c.move_piece("A2", "A3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[p]",  "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",  "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[r]", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_knight(standard_board):
+    actual = standard_board.board
+    c.move_piece("B1", "C3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x", "[k]",   "x",   "x",   "x",   "x",   "x"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[r]",  "x",  "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_rook(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("A1", "A3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[r]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x", "[k]", "[b]", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_bishop(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("C1", "A3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["[b]",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["x",    "x",   "x",   "x",   "x",   "x",   "x",   "x"],
+                ["[r]", "[k]", "x", "[Q]", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_queen(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("D1", "F3", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x", "x", "x", "x", "x", "[Q]", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["[r]", "[k]", "[b]", "x", "[K]", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_move_king(pawns_forward_board):
+    actual = pawns_forward_board.board
+    c.move_piece("E1", "E2", actual, False)
+    expected = [["{r}", "{k}", "{b}", "{Q}", "{K}", "{b}", "{k}", "{r}"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}", "{p}"],
+                ["[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]", "[p]"],
+                ["x", "x", "x", "x", "x", "x", "x", "x"],
+                ["x", "x", "x", "x", "[K]", "x", "x", "x"],
+                ["[r]", "[k]", "[b]", "[Q]", "x", "[b]", "[k]", "[r]"]]
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_find_black_king(standard_board):
+    actual = c.find_king("black", standard_board)
+    expected = (0, 4)
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_find_white_king(standard_board):
+    actual = c.find_king("white", standard_board)
+    expected = (7, 4)
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_black_king_not_check(standard_board):
+    actual = c.check_check("black", standard_board)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_black_king_check(black_in_check_not_checkmate):
+    actual = c.check_check("black", black_in_check_not_checkmate)
+    expected = True
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_black_king_check_not_checkmate(black_in_check_not_checkmate):
+    actual = c.check_checkmate("black", black_in_check_not_checkmate)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_black_king_checkmate(black_in_checkmate):
+    actual = c.check_checkmate("black", black_in_checkmate)
+    expected = True
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_not_check(standard_board):
+    actual = c.check_check("white", standard_board)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_check(white_in_check_not_checkmate):
+    actual = c.check_check("white", white_in_check_not_checkmate)
+    expected = True
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_check_not_checkmate(white_in_check_not_checkmate):
+    actual = c.check_checkmate("white", white_in_check_not_checkmate)
+    expected = False
+    assert actual == expected
+
+
+# @pytest.mark.skip("pending")
+def test_white_king_checkmate(white_in_checkmate):
+    actual = c.check_checkmate("white", white_in_checkmate)
+    expected = True
     assert actual == expected
 
 

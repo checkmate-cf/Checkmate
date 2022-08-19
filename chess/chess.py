@@ -1,17 +1,5 @@
-from chess.board import Chessboard
 import re
 import copy
-
-
-def welcome_user(first_game):
-    if first_game:
-        print("Welcome to Checkmate, the ultimate destination for playing chess!!\n")
-    print("Would you like to play chess? y/n ")
-    user_input = input("> ").lower()
-    while user_input != "y" and user_input != "n":
-        print('Must enter valid response: "y" or "n", try again')
-        user_input = input("> ").lower()
-    return user_input == "y"
 
 
 def move_piece(start_pos, end_pos, board, real_move=True):
@@ -120,7 +108,7 @@ def pawn_promotion(end_col, board, curr_color):
         board[7][end_col] = f"{{{promotion_type}}}"
 
 
-def validate_move(start_pos, end_pos, board, player_color):
+def validate_move(start_pos, end_pos, board, player_color, provide_feedback=False):
     # turn string input into array coordinates
     start_list = list(start_pos)
     end_list = list(end_pos)
@@ -146,25 +134,26 @@ def validate_move(start_pos, end_pos, board, player_color):
 
     # Get the piece being moved
     piece = get_piece(start_coord)
-    # print(f"piece: {piece}")
 
     # Check if selected space actually has a piece
     if piece == "x":
-        print("piece can't be empty")
+        if provide_feedback:
+            print("piece can't be empty")
         return False
 
     # Get color of piece being moved
     piece_color = get_color(start_coord)
-    # print(f"piece color: {piece_color}")
 
     # Check if player is moving their own piece
     if not check_color_match(player_color, piece_color):
-        print("color doesn't match")
+        if provide_feedback:
+            print("color doesn't match")
         return False
 
     # make sure you can't take your own piece
     if get_color(end_coord) == player_color:
-        print("Don't attack your own piece!")
+        if provide_feedback:
+            print("Don't attack your own piece!")
         return False
 
     def validate_pawn(color, start, end, board):
@@ -176,7 +165,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                 if abs(start[0] - end[0]) == 1:
                     # check for enemy at end point
                     if board.board[end[1]][end[0]] == "x":
-                        print("pawn can only move diagonal if attacking")
+                        if provide_feedback:
+                            print("pawn can only move diagonal if attacking")
                         return False
                     return True
 
@@ -187,16 +177,17 @@ def validate_move(start_pos, end_pos, board, player_color):
             # check if moving 2 spaces from home row
             if start[1] - end[1] == -2:
                 if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
+                    if provide_feedback:
+                        print("pawn can only move forward if empty")
                     return False
-                print("pawn moves 2")
                 return start[1] == 1
 
             # moves straight down
             if start[1] - end[1] == -1:
                 # check if end point is empty
                 if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
+                    if provide_feedback:
+                        print("pawn can only move forward if empty")
                     return False
                 return True
             return False
@@ -208,7 +199,8 @@ def validate_move(start_pos, end_pos, board, player_color):
                 if abs(start[0] - end[0]) == 1:
                     # check for enemy at end point
                     if board.board[end[1]][end[0]] == "x":
-                        print("pawn can only move diagonal if attacking")
+                        if provide_feedback:
+                            print("pawn can only move diagonal if attacking")
                         return False
                     return True
 
@@ -219,16 +211,17 @@ def validate_move(start_pos, end_pos, board, player_color):
             # check if moving 2 spaces from home row
             if start[1] - end[1] == 2:
                 if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
+                    if provide_feedback:
+                        print("pawn can only move forward if empty")
                     return False
-                print("pawn moves 2")
                 return start[1] == 6
 
             # moves straight down
             if start[1] - end[1] == 1:
                 # check if end point is empty
                 if board.board[end[1]][end[0]] != "x":
-                    print("pawn can only move forward if empty")
+                    if provide_feedback:
+                        print("pawn can only move forward if empty")
                     return False
                 return True
             return False
@@ -320,7 +313,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                         return False
                     col += 1
                     row += 1
-                    spaces -=1
+                    spaces -= 1
                 return True
             # moving up
             else:
@@ -345,7 +338,7 @@ def validate_move(start_pos, end_pos, board, player_color):
                         return False
                     col -= 1
                     row += 1
-                    spaces -=1
+                    spaces -= 1
                 return True
             # moving up
             else:
@@ -385,63 +378,8 @@ def validate_move(start_pos, end_pos, board, player_color):
     elif piece[1] == "k":
         return validate_knight(start_coord, end_coord)
     elif piece[1] == "p":
-        # print("checking pawn")
         return validate_pawn(piece_color, start_coord, end_coord, board)
 
 
 def reset(board):
     board.__init__()
-
-
-def play_game():
-    first_game = True
-    while welcome_user(first_game):
-        first_game = False
-        print('Let the games begin, if at any point you want to quit, type "Forfeit"')
-        game_board = Chessboard()
-        game_not_over = True
-        curr_player = "White"
-        while game_not_over:
-            print(f"{curr_player}'s turn")
-            valid_move = False
-            while not valid_move:
-                game_board.render()
-                user_input = input("Where would you like to move: ")
-                if user_input.lower() == "forfeit":
-                    if curr_player == "White":
-                        print("Black Wins!!\n")
-                    else:
-                        print("White Wins!!\n")
-                    game_not_over = False
-                    break
-                parsed_input = parse_input(user_input)
-                if not parsed_input:
-                    print('Please answer in the format "B2 B3". Must be in range A-H and 1-8')
-                elif not validate_move(parsed_input[0], parsed_input[1], game_board, curr_player.lower()):
-                    print('Move not possible')
-                elif check_check(curr_player.lower(), game_board, parsed_input):
-                    print("You may not cause your own king to be put in check")
-                else:
-                    valid_move = True
-                    move_piece(parsed_input[0], parsed_input[1], game_board.board)
-            if curr_player == "White" and game_not_over:
-                if check_check("black", game_board):
-                    if check_checkmate("black", game_board):
-                        game_board.render()
-                        print(f"CHECKMATE! {curr_player} wins!!")
-                        game_not_over = False
-                    else:
-                        print("Check!")
-                curr_player = "Black"
-            elif curr_player == "Black" and game_not_over:
-                if check_check("white", game_board):
-                    if check_checkmate("white", game_board):
-                        game_board.render()
-                        print(f"CHECKMATE! {curr_player} wins!!")
-                        game_not_over = False
-                    else:
-                        print("Check!")
-                curr_player = "White"
-
-if __name__ == '__main__':
-    play_game()
