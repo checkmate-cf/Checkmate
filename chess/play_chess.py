@@ -121,7 +121,7 @@ def play_chess():
                     end_space = int(clicked_coordinates[0] // GRID_WIDTH), int(clicked_coordinates[1] // GRID_HEIGHT)
                     start_pos_text = f"{chr(start_space[0] + 65)}{8 - start_space[1]}"
                     end_pos_text = f"{chr(end_space[0] + 65)}{8 - end_space[1]}"
-                    if not chess.validate_move(start_pos_text, end_pos_text, game_board, curr_player.lower()):
+                    if not chess.validate_move(start_pos_text, end_pos_text, game_board, curr_player.lower(), True):
                         print("Invalid Move")
                     elif chess.check_check(curr_player.lower(), game_board, (start_pos_text, end_pos_text)):
                         print("You may not cause your king to move into check or allow him to remain in check")
